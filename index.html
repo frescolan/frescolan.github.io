@@ -4,144 +4,246 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>François Escolan</title>
-  <meta name="description" content="François Escolan, PhD student at CERMICS (École nationale des ponts et chaussées) and INRIA MATHERIALS.">
+  <meta name="description" content="François Escolan, PhD student in applied mathematics at CERMICS (École nationale des ponts et chaussées) and INRIA MATHERIALS.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --text: #333;
-      --muted: #666;
-      --link: #21759b;
-      --link-hover: #0f3647;
-      --rule: #ddd;
-      --bg: #e6e6e6;
-      --page: #fff;
+      --paper: #fbfbfa;
+      --ink: #1d2027;
+      --muted: #646b77;
+      --accent: #2b5c72;
+      --rule: #e2e4e8;
+      --serif: "Spectral", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
     }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --paper: #15181d;
+        --ink: #e6e8eb;
+        --muted: #9aa1ac;
+        --accent: #8ec0d4;
+        --rule: #2a2f37;
+      }
+    }
+
     * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
     body {
       margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: "Open Sans", Helvetica, Arial, sans-serif;
-      font-size: 15px;
-      line-height: 1.7;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: 1.0625rem;
+      line-height: 1.65;
     }
-    .page {
-      max-width: 960px;
-      margin: 2.5rem auto;
-      padding: 2rem 2.5rem 1.5rem;
-      background: var(--page);
-      box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
+    .wrap {
+      max-width: 50rem;
+      margin: 0 auto;
+      padding: 0 1.5rem;
     }
-    header.site {
-      border-bottom: 1px solid var(--rule);
-      padding-bottom: 1rem;
-      margin-bottom: 2rem;
+
+    a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+    a:hover { border-bottom-color: currentColor; }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+    strong { font-weight: 500; }
+    p { margin: 0 0 0.9rem; }
+
+    /* Header */
+    header.top { padding: 3rem 0 1.5rem; }
+    h1 {
+      margin: 0;
+      font-weight: 300;
+      font-size: clamp(2.3rem, 6vw, 3.2rem);
+      line-height: 1.1;
+      letter-spacing: -0.012em;
     }
-    header.site .affil { color: var(--muted); font-size: 0.9rem; margin: 0; }
-    h1 { font-size: 1.6rem; font-weight: normal; line-height: 1.3; margin: 0 0 1.2rem; }
-    p { margin: 0 0 1.2rem; }
-    a { color: var(--link); text-decoration: none; }
-    a:hover, a:focus { color: var(--link-hover); text-decoration: underline; }
-    hr { border: 0; border-top: 1px solid var(--rule); margin: 1.8rem 0; }
-    ul { margin: 0 0 1.2rem; padding-left: 1.5rem; }
-    li { margin-bottom: 0.4rem; }
+    .role { margin: 0.6rem 0 0; color: var(--muted); font-style: italic; }
+    nav.jump { margin-top: 1.1rem; display: flex; gap: 1.4rem; font-size: 0.98rem; }
+
+    /* Sections */
+    section {
+      border-top: 1px solid var(--rule);
+      padding: 1.75rem 0 0.75rem;
+    }
+    h2 {
+      margin: 0 0 1rem;
+      font-weight: 400;
+      font-size: 1.2rem;
+      font-variant: small-caps;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+    }
+    h3 {
+      margin: 1.3rem 0 0.35rem;
+      font-weight: 500;
+      font-size: 1.05rem;
+      font-style: normal;
+      color: var(--ink);
+    }
+    h2 + h3, h2 + * + h3 { margin-top: 0; }
+
+    /* Feed */
+    ol.feed { list-style: none; margin: 0 0 0.75rem; padding: 0; }
+    ol.feed > li {
+      display: grid;
+      grid-template-columns: 7.5rem 1fr;
+      gap: 1.25rem;
+      padding: 0.65rem 0;
+    }
+    ol.feed > li + li { border-top: 1px dotted var(--rule); }
+    .when {
+      font-size: 0.93rem;
+      color: var(--muted);
+      font-variant-numeric: lining-nums tabular-nums;
+      padding-top: 0.12rem;
+    }
+    .event { display: block; font-weight: 400; }
+    .venue { display: block; font-size: 0.96rem; color: var(--muted); }
+    .talk { display: block; margin-top: 0.15rem; }
+    .kind { color: var(--accent); font-size: 0.93rem; }
+
+    .desc { margin: 0.3rem 0 0; font-size: 0.97rem; max-width: 38rem; }
+    ul.plain { list-style: none; margin: 0 0 0.75rem; padding: 0; }
+    ul.plain li { padding: 0.35rem 0; }
+    ul.plain li + li { border-top: 1px dotted var(--rule); }
+    .code { font-variant: small-caps; letter-spacing: 0.04em; }
+
     footer {
       border-top: 1px solid var(--rule);
-      margin-top: 2rem;
-      padding-top: 1rem;
-      font-size: 0.85rem;
+      margin-top: 1rem;
+      padding: 1rem 0 2.5rem;
+      font-size: 0.88rem;
       color: var(--muted);
     }
-    @media (max-width: 640px) {
-      .page { margin: 0; padding: 1.25rem; box-shadow: none; }
-      body { background: var(--page); }
+
+    @media (max-width: 600px) {
+      body { font-size: 1.02rem; }
+      header.top { padding-top: 2.25rem; }
+      ol.feed > li { grid-template-columns: 1fr; gap: 0.05rem; }
     }
   </style>
 </head>
 <body>
-<div class="page">
+<div class="wrap">
 
-  <header class="site">
-    <p class="affil">
-      <a href="https://cermics-lab.enpc.fr/">CERMICS</a>, École nationale des ponts et chaussées
-      &nbsp;|&nbsp; <a href="https://team.inria.fr/matherials/">INRIA MATHERIALS</a>
-    </p>
+  <header class="top">
+    <h1>François Escolan</h1>
+    <p class="role">PhD student in applied mathematics</p>
+    <nav class="jump" aria-label="Sections">
+      <a href="#talks">Talks</a>
+      <a href="#teaching">Teaching</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </header>
 
   <main>
-    <h1>François Escolan</h1>
+    <section id="about" aria-label="About">
+      <p>
+        I am a PhD student at <a href="https://cermics-lab.enpc.fr/">CERMICS</a>, supervised by
+        <a href="https://team.inria.fr/matherials/team-members/virginie-ehrlacher-galland/">Virginie Ehrlacher</a>,
+        <a href="https://cermics.enpc.fr/~reygnerj/">Julien Reygner</a> and
+        <a href="https://cermics.enpc.fr/~alfonsi/pageweb_fr.html">Aurélien Alfonsi</a>,
+        and a member of the INRIA <a href="https://team.inria.fr/matherials/">MATHERIALS</a> team.
+        My PhD is funded by the <a href="https://team.inria.fr/matherials/highleap-project/">ERC HighLEAP</a> starting grant.
+      </p>
+    </section>
 
-    <p>
-      PhD student at CERMICS working under
-      <a href="https://team.inria.fr/matherials/team-members/virginie-ehrlacher-galland/">Virginie Ehrlacher</a>,
-      <a href="https://cermics.enpc.fr/~reygnerj/">Julien Reygner</a> and
-      <a href="https://cermics.enpc.fr/~alfonsi/pageweb_fr.html">Aurélien Alfonsi</a>.
-      I am part of the INRIA <a href="https://team.inria.fr/matherials/">MATHERIALS</a> team.
-      My PhD is funded by the <a href="https://team.inria.fr/matherials/highleap-project/">ERC HighLEAP</a> starting grant.
-    </p>
+    <section id="talks">
+      <h2>Talks and posters</h2>
 
-    <p>PhD title: <strong>Mean-field limit of particle system on manifolds</strong></p>
+      <h3>Invited talks</h3>
+      <ol class="feed">
+        <li>
+          <span class="when">7 Oct 2026</span>
+          <div>
+            <a class="event" href="https://indico.math.cnrs.fr/event/16928/">Les Probabilités de Demain</a> <span class="venue">Paris, France</span>
+            <span class="talk"><em>Moment constrained optimal transportation problems</em></span>
+          </div>
+        </li>
+      </ol>
 
-    <hr>
+      <h3>Contributed talks</h3>
+      <ol class="feed">
+        <li>
+          <span class="when">8–12 Jun 2026</span>
+          <div>
+            <a class="event" href="https://cs2026.sciencesconf.org">Curves and Surfaces 2026</a>
+            <span class="venue"><a href="http://smai.emath.fr/spip.php?article406">SMAI-SIGMA</a>, Saint-Malo, France</span>
+            <span class="talk"><em>Chaoticity of particle systems under empirical moment constraints</em></span>
+          </div>
+        </li>
+        <li>
+          <span class="when">11–13 May 2026</span>
+          <div>
+            <a class="event" href="https://cermics-lab.enpc.fr/workshop-computational-methods-for-probability-distributions-on-manifolds-paris-2026/">Computational Methods for Probability Distributions on Manifolds</a>
+            <span class="venue"><a href="https://www.essec.edu/en/">ESSEC</a>, <a href="https://cermics-lab.enpc.fr">CERMICS</a> and <a href="https://www.ceremade.dauphine.fr">CEREMADE</a>, Paris, France</span>
+            <span class="talk"><span class="kind">Lightning talk:</span> <em>Chaoticity of particle systems under empirical moment constraints</em></span>
+          </div>
+        </li>
+        <li>
+          <span class="when">9–13 Mar 2026</span>
+          <div>
+            <a class="event" href="https://www.uni-ulm.de/mawi/iaa/forschung/spring-school-2026-horizons-in-nonlinear-pdes/">Horizons in Nonlinear PDEs</a>
+            <span class="venue"><a href="https://www.uni-ulm.de">Universität Ulm</a>, Ulm, Germany</span>
+            <span class="talk"><em>Chaoticity of particle systems under empirical moment constraints</em></span>
+          </div>
+        </li>
+        <li>
+          <span class="when">2–4 Mar 2026</span>
+          <div>
+            <a class="event" href="https://cjcma2026.sciencesconf.org/?lang=fr">CJC-MA 26</a>
+            <span class="venue"><a href="https://ecoledesponts.fr">École nationale des ponts et chaussées</a>, Champs-sur-Marne, France</span>
+            <span class="talk"><em>Chaoticity of particle systems under empirical moment constraints</em></span>
+          </div>
+        </li>
+      </ol>
 
-    <p><strong>Contributed Talks &amp; Posters at Conferences &amp; Workshops:</strong></p>
-    <ul>
-      <li>
-        <a href="https://cs2026.sciencesconf.org"><strong>Curves and Surfaces 2026</strong></a>, 8–12 June 2026,
-        <a href="http://smai.emath.fr/spip.php?article406"><strong>SMAI-SIGMA</strong></a>,
-        <strong>Contributed talk:</strong> <em>Chaoticity of particle systems under empirical moment constraints.</em>
-      </li>
-      <li>
-        <a href="https://cermics-lab.enpc.fr/workshop-computational-methods-for-probability-distributions-on-manifolds-paris-2026/"><strong>Computational Methods for Probability Distributions on Manifolds</strong></a>,
-        11–13 May 2026,
-        <a href="https://www.essec.edu/en/"><strong>ESSEC</strong></a> /
-        <a href="https://cermics-lab.enpc.fr"><strong>CERMICS</strong></a> /
-        <a href="https://www.ceremade.dauphine.fr"><strong>CEREMADE</strong></a>,
-        <strong>Lightning talk:</strong> <em>Chaoticity of particle systems under empirical moment constraints.</em>
-      </li>
-      <li>
-        <a href="https://www.eurandom.tue.nl/event/geostoch-2026/"><strong>GeoStoch 2026</strong></a>, 15–19 March 2026,
-        <a href="https://www.tue.nl/en/"><strong>Technische Universiteit Eindhoven</strong></a>,
-        <strong>Poster:</strong> <em>Chaoticity of particle systems under empirical moment constraints.</em>
-      </li>
-      <li>
-        <a href="https://www.uni-ulm.de/mawi/iaa/forschung/spring-school-2026-horizons-in-nonlinear-pdes/"><strong>Horizons in Nonlinear PDEs</strong></a>, 9–13 March 2026,
-        <a href="https://www.uni-ulm.de"><strong>Universität Ulm</strong></a>,
-        <strong>Contributed talk:</strong> <em>Chaoticity of particle systems under empirical moment constraints.</em>
-      </li>
-      <li>
-        <a href="https://cjcma2026.sciencesconf.org/?lang=fr"><strong>CJC-MA 26</strong></a>, 2–4 March 2026,
-        <a href="https://ecoledesponts.fr"><strong>École nationale des ponts et chaussées</strong></a>,
-        <strong>Contributed talk:</strong> <em>Chaoticity of particle systems under empirical moment constraints.</em>
-      </li>
-    </ul>
+      <h3>Posters</h3>
+      <ol class="feed">
+        <li>
+          <span class="when">15–19 Mar 2026</span>
+          <div>
+            <a class="event" href="https://www.eurandom.tue.nl/event/geostoch-2026/">GeoStoch 2026</a>
+            <span class="venue"><a href="https://www.tue.nl/en/">Technische Universiteit Eindhoven</a>, Eindhoven, Netherlands</span>
+            <span class="talk"><em>Chaoticity of particle systems under empirical moment constraints</em></span>
+          </div>
+        </li>
+      </ol>
+    </section>
 
-    <hr>
+    <section id="teaching">
+      <h2>Teaching</h2>
 
-    <p><strong>Teaching:</strong></p>
-    <ul>
-      <li>
-        Teaching Assistant in the <strong>Numerical Statistics</strong>
-        (<a href="https://gede.enpc.fr/programme/fiche.aspx?param=M:STNUM"><strong>STNUM</strong></a>)
-        course for second-year students at
-        <a href="https://ecoledesponts.fr"><strong>École nationale des ponts et chaussées</strong></a>.
-      </li>
-      <li>
-        Teaching Assistant in the <strong>Practical Machine Learning Methods</strong>
-        (<a href="https://gede.enpc.fr/programme/fiche.aspx?param=M:PRAMA"><strong>PRAMA</strong></a>)
-        course for second-year students at
-        <a href="https://ecoledesponts.fr"><strong>École nationale des ponts et chaussées</strong></a>.
-      </li>
-    </ul>
+      <h3>2025–2026</h3>
+      <ol class="feed">
+	 <li>
+          <span class="when"><a class="code" href="https://gede.enpc.fr/programme/fiche.aspx?param=M:PRAMA">prama</a></span>
+          <div>
+            <span class="event">Practical Machine Learning Methods</span>
+            <span class="venue">Teaching assistant, <a href="https://ecoledesponts.fr">École nationale des ponts et chaussées</a></span>
+            <p class="desc">Intermediate machine learning course for second year students in the engineering track.</p>
+          </div>
+        </li>
+        <li>
+          <span class="when"><a class="code" href="https://gede.enpc.fr/programme/fiche.aspx?param=M:STNUM">stnum</a></span>
+          <div>
+            <span class="event">Numerical Statistics</span>
+            <span class="venue">Teaching assistant, <a href="https://ecoledesponts.fr">École nationale des ponts et chaussées</a></span>
+            <p class="desc">Introductory inferential statistics course for second year students in the engineering track.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
 
-    <hr>
-
-    <p>You can reach me at <strong>firstname.lastname@enpc.fr</strong></p>
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>You can reach me at: firstname.lastname@enpc.fr</p>
+    </section>
   </main>
 
-  <footer>
-    Last updated: October 2026
-  </footer>
-
+  <footer>Last updated October 2026</footer>
 </div>
 </body>
 </html>
